@@ -40,7 +40,7 @@ export default function Pizza() {
                 <br />
                 <div className='container' style={{ backgroundColor: "white", minHeight:"500px" }}>
                     <br />
-                    <center><h3>Recommended Delicious Veg-Pizza🍕</h3></center> <hr />
+                    <center><h3>Recommended Delicious Pizza🍕</h3></center> <hr />
                     <div className='row' style={{ padding: "2rem" }}>
                         {item.map((peritem) => {
                             return <Item itemComp={peritem} />

@@ -1,15 +1,15 @@
 import axios from "axios";
-import { motion } from "framer-motion";
+import { Collapse } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
-import { Button, Collapse } from "react-bootstrap";
 import { useLocation } from "react-router";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import Header from "../Header/Header";
-// import URL from '../URL/Url'
+import API_URL from '../URL/Url'
+import "./Itemsize.css";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../Redux/Actions/ItemAction";
-import URL from "../URL/Url";
-import "./Itemsize.css";
 
 export default function Itemsize() {
   const { state } = useLocation();
@@ -27,7 +27,7 @@ export default function Itemsize() {
   };
   const getItemSize = () => {
     console.log("size" + itemsize);
-    const url = `${URL}itemSize/${itemid}`;
+    const url = `${API_URL}itemSize/${itemid}`;
     axios.get(url).then((response) => {
       const result = response.data;
       console.log(result);
@@ -41,7 +41,7 @@ export default function Itemsize() {
 
   const [topping, settopping] = useState([]);
   const getToppings = () => {
-    const url = `${URL}toppings/showAll`;
+    const url = `${API_URL}toppings/showAll`;
     axios.get(url).then((response) => {
       const result = response.data;
       console.log(result);
@@ -61,7 +61,7 @@ export default function Itemsize() {
   useEffect(() => {
     const itemId = itemid;
     console.log(itemId);
-    fetch(`${URL}itemImage/getpizzathumbnail/${itemId}`)
+    fetch(`${API_URL}itemImage/getpizzathumbnail/${itemId}`)
       .then((response) => response.arrayBuffer())
       .then((buffer) => {
         const blob = new Blob([buffer], { type: "image/jpeg" });
@@ -70,7 +70,19 @@ export default function Itemsize() {
       });
   }, [state]);
 
-
+  // function ChangeSize() {
+  //     let change = document.getElementById("sizeChange").value
+  //     const url = `http://localhost:7071/itemSize/${itemid}/${change}`
+  //     axios.get(url).then((response) => {
+  //         const result = response.data
+  //         console.log(result)
+  //         if (result.status === "success") {
+  //             setsize(result.data)
+  //         } else {
+  //             toast.error(result['error'])
+  //         }
+  //     })
+  // }
 
   const dispatch = useDispatch();
   const Add2cart = (varioussize) => {
@@ -118,7 +130,7 @@ export default function Itemsize() {
     console.log("varioussize" + varioussize);
     console.log(varioussize);
     if (toppingId === "") {
-      const url = `${URL}cart/addWithoutToppings`;
+      const url = `${API_URL}cart/addWithoutToppings`;
       axios.post(url, bodywithouttopping).then((response) => {
         const result = response.data;
         console.log(result);
@@ -129,7 +141,7 @@ export default function Itemsize() {
         }
       });
     } else {
-      const url = `${URL}cart/addWithToppings`;
+      const url = `${API_URL}cart/addWithToppings`;
       axios.post(url, bodywithtopping).then((response) => {
         const result = response.data;
         console.log(result);
@@ -208,8 +220,22 @@ export default function Itemsize() {
                       <h5>Size : {varioussize.size}</h5>
                       <h5>Price : {varioussize.price} Rs.</h5>
                       <hr />
+                      {/* <h6>Other Sizes</h6> */}
                       <div className="form" id="">
-                        
+                        {/* <div className="row">
+                          <div className="col">
+                            <select
+                              name="sizeChange"
+                              onChange={sizeHandler}
+                              id="sizeChange"
+                              style={{ width: "200px" }}
+                            >
+                              <option value="Regular">Regular</option>
+                              <option value="small">Small</option>
+                              <option value="large">Large</option>
+                            </select>
+                          </div>
+                        </div> */}
                         <div className="col">
                           <h6>Quantity</h6>
                         </div>

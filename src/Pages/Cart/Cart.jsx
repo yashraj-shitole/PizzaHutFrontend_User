@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { toast } from 'react-toastify'
 import CartComp from '../../Component/CartComp/CartComp'
 import Header from '../Header/Header'
-import URL from '../URL/Url'
+import API_URL from '../URL/Url'
 import './Cart.css'
 
 export default function Cart() {
@@ -15,8 +15,7 @@ export default function Cart() {
     const [cart, setcart] = useState([])
     const getCartItem = () => {
         const status=1;
-        const url = `${URL}cart/${currentuserId}/${status}`
-        console.log("")
+        const url = `${API_URL}cart/${currentuserId}/${status}`
         axios.get(url).then((response) => {
             const result = response.data
             console.log(result)

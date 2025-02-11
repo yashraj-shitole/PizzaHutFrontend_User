@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-// import URL from '../../Pages/URL/Url'
-import axios from "axios";
-import { motion } from "framer-motion";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
-import URL from '../../Pages/URL/Url';
-import { removeFromCart } from "../../Redux/Actions/ItemAction";
+import API_URL from '../../Pages/URL/Url'
 import "./CartComp.css";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../Redux/Actions/ItemAction";
+import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
 
 export default function CartComp(props) {
   const { cartComps } = props;
@@ -16,7 +15,7 @@ export default function CartComp(props) {
   useEffect(() => {
     const itemId = cartComps.itemsize.item.itemid;
     console.log(itemId);
-    fetch(`${URL}itemImage/getpizzathumbnail/${itemId}`)
+    fetch(`${API_URL}itemImage/getpizzathumbnail/${itemId}`)
       .then((response) => response.arrayBuffer())
       .then((buffer) => {
         const blob = new Blob([buffer], { type: "image/jpeg" });
@@ -29,11 +28,11 @@ export default function CartComp(props) {
   const remove = (cartcompredux) => {
     dispatch(removeFromCart(cartcompredux));
   };
-  const navigate = useNavigate()  ;
+  const navigate = useNavigate();
 
   const removefromDB = (cartComp) => {
     const cartId = cartComp.cartId;
-    const url = `${URL}cart/deleteById/${cartId}`;
+    const url = `${API_URL}cart/deleteById/${cartId}`;
     axios.delete(url).then((response) => {
       const result = response.data;
       console.log(result);
@@ -66,9 +65,9 @@ export default function CartComp(props) {
                 <td style={{ width: "600px" }}>
                   <div className="row">
                     <div className="col">
-                      <h5 className="cartInfo" style={{ marginLeft: "10%" }}>
+                      <h4 className="cartInfo" style={{ marginLeft: "10%" }}>
                         {cartComps.itemsize.item.itemName}
-                      </h5>
+                      </h4>
                     </div>
                     <div className="col">
                       <h4
@@ -114,3 +113,32 @@ export default function CartComp(props) {
     </div>
   );
 }
+
+// style={{ marginLeft: "10px", borderRadius: "20px", width: "300px", height: "200px" }}
+
+// cartId: 6
+// itemsize:(sizeid)
+//     item:
+//         description: "pizza, dish of Italian origin consisting of a flattened disk of bread dough"
+//          itemName: "Momo Mia Pizza" *****
+//          itemid: 1
+//         type: "Veg" *****
+//     price: 150
+//     size: "Small"
+//     sizeId: 1
+
+// price: 525 (price) ******
+// quantity: 3 (quantity) *****
+// toppings: (toppingid)
+//     price: 25
+//     toppingId: 1
+//     toppingName: "faltu" ******
+
+// user: (useriD)
+//     email: "w@g.com"
+//     firstName: "Bhushan"
+//     lastName: "Baviskar"
+//     password: "333333"
+//     phoneNo: "1212121212"
+//     role: "User"
+//     userId: 3

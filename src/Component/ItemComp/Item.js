@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import URL from '../../Pages/URL/Url';
+import API_URL from '../../Pages/URL/Url';
 import "./Item.css";
 
 export default function Item(props) {
@@ -11,7 +11,7 @@ export default function Item(props) {
 
   useEffect(() => {
     const itemId = itemComp.itemid;
-    fetch(`${URL}itemImage/getpizzathumbnail/${itemId}`)
+    fetch(`${API_URL}itemImage/getpizzathumbnail/${itemId}`)
       .then((response) => response.arrayBuffer())
       .then((buffer) => {
         const blob = new Blob([buffer], { type: "image/jpeg" });

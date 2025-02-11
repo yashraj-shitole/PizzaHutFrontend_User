@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import URL from '../../Pages/URL/Url'
+import API_URL from '../../Pages/URL/Url'
 
 export default function ItemsizeComp(props) {
   const { sizeComp } = props
 
-  let imageUrl = `${URL}itemImage/item/${sizeComp.item.itemid}`
+  let imageUrl = `${API_URL}itemImage/item/${sizeComp.item.itemid}`
   const data = sizeComp.price
 
   const [counter, setCounter] = useState(1)
@@ -24,7 +24,7 @@ export default function ItemsizeComp(props) {
       <div>
         <div className="row">
           <div className="col">
-            <img src={imageUrl} alt="" className='float-end shadow' style={{ height: "380px", width: "500px", borderRadius: "10px" }} />
+            <img src={imageUrl} alt="sd" className='float-end shadow' style={{ height: "380px", width: "500px", borderRadius: "10px" }} />
           </div>
           <div className="col">
             <h1>{sizeComp.item.itemName} </h1>
